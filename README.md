@@ -2,6 +2,10 @@
 
 This is a Todo application built with React and Firebase for authentication. It includes end-to-end tests using Playwright and Playwright-BDD.
 
+## Demo
+
+![Project Demo](./assets/demo.gif)
+
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
