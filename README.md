@@ -80,6 +80,15 @@ Before you begin, ensure you have met the following requirements:
    export const auth = getAuth(app);
    ```
 
+## Creating a Testable User in Firebase
+
+1. Go to the [Firebase Console](https://console.firebase.google.com/).
+2. Select your project.
+3. In the left sidebar, go to "Authentication" and then the "Users" tab.
+4. Click on "Add user".
+5. Enter an email and password for the test user (e.g., `test@example.com` and `password`).
+6. Click "Add user" to create the user.
+
 ## Running the Application
 
 1. Start the development server:
