@@ -58,6 +58,10 @@ Before you begin, ensure you have met the following requirements:
    REACT_APP_FIREBASE_STORAGE_BUCKET=your_storage_bucket
    REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
    REACT_APP_FIREBASE_APP_ID=your_app_id
+
+   TEST_USER_EMAIL=test@example.com
+   TEST_USER_PASSWORD=password
+   TEST_HOST=http://localhost:3000
    ```
 
 3. Ensure your `firebaseConfig.ts` file uses the environment variables:
@@ -120,6 +124,9 @@ Before you begin, ensure you have met the following requirements:
    ```ts
    import { defineConfig } from '@playwright/test';
    import { defineBddConfig } from 'playwright-bdd';
+   import dotenv from 'dotenv';
+
+   dotenv.config();
 
    const testDir = defineBddConfig({
      features: './features/*.feature',
@@ -128,7 +135,7 @@ Before you begin, ensure you have met the following requirements:
 
    export default defineConfig({
      use: {
-       baseURL: 'http://localhost:3000', // Adjust the base URL as needed
+       baseURL: process.env.TEST_HOST, // Adjust the base URL as needed
      },
      projects: [
        {
@@ -148,6 +155,12 @@ Before you begin, ensure you have met the following requirements:
 
    ```sh
    npm run e2e
+   ```
+
+5. Generate and view the HTML report:
+
+   ```sh
+   npm run report
    ```
 
 ## License

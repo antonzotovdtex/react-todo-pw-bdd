@@ -1,19 +1,30 @@
 import { expect } from '@playwright/test';
 import { createBdd } from 'playwright-bdd';
 const { Given, When, Then } = createBdd();
+import dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
 
 Given('a user is on the login page', async ({ page }) => {
   await page.goto('/');
 });
 
 When('the user logs in with valid credentials', async ({ page }) => {
-  await page.fill('input[name="email"]', 'test@example.com');
-  await page.fill('input[name="password"]', 'password');
+  if (!process.env.TEST_USER_EMAIL || !process.env.TEST_USER_PASSWORD) {
+    throw new Error(
+      'Environment variables TEST_USER_EMAIL and TEST_USER_PASSWORD must be set',
+    );
+  }
+  await page.fill('input[name="email"]', process.env.TEST_USER_EMAIL);
+  await page.fill('input[name="password"]', process.env.TEST_USER_PASSWORD);
   await page.click('button[type="submit"]');
 });
 
 Then('the user should see the welcome message', async ({ page }) => {
-  await expect(page.locator('text=Welcome, test@example.com')).toBeVisible();
+  await expect(
+    page.locator(`text=Welcome, ${process.env.TEST_USER_EMAIL}`),
+  ).toBeVisible();
 });
 
 When(

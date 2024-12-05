@@ -1,9 +1,13 @@
 import { defineConfig, devices } from '@playwright/test';
 import { defineBddConfig } from 'playwright-bdd';
+import dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
 
 const testDir = defineBddConfig({
   features: './features/*.feature',
-  steps: './features/**/*.ts', // Path to your step definitions
+  steps: './features/step-definitions/todo.steps.ts', // Path to your step definitions
 });
 
 /**
@@ -33,7 +37,7 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
-    baseURL: 'http://localhost:3000', // Update if your app runs on a different port
+    baseURL: process.env.TEST_HOST, // Update if your app runs on a different port
     headless: true,
     viewport: { width: 1280, height: 720 },
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
