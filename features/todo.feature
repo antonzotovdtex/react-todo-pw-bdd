@@ -17,3 +17,4 @@ Scenario: User logs in, creates a todo, edits the todo, deletes the todo, and lo
 
   When the user clicks the sign out button
   Then the user should be redirected to the login page
+
